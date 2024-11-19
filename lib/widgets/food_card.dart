@@ -37,7 +37,7 @@ class ItemCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(content: Text("You have pressed the ${item.name} button!")));
-          if (item.name == "Add Product") {
+          if (item.name == "Add Food") {
             Navigator.push(
               context,
               MaterialPageRoute(

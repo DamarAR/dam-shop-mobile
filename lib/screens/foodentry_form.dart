@@ -27,7 +27,7 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Add Your Product Today',
+            'Add Your Food ',
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -58,7 +58,7 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "name cannot be empty!";
+                      return "Food cannot be empty!";
                     }
                     return null;
                   },

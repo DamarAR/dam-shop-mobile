@@ -35,7 +35,7 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Entry List'),
+        title: const Text('Food Entry List'),
       ),
       drawer: const LeftDrawer(),
       body: FutureBuilder(
@@ -48,7 +48,7 @@ class _ProductEntryPageState extends State<ProductEntryPage> {
               return const Column(
                 children: [
                   Text(
-                    'There is no product data in mental health tracker.',
+                    'There is no food data in Dam-Shop!',
                     style: TextStyle(fontSize: 20, color: Color(0xff59A5D8)),
                   ),
                   SizedBox(height: 8),

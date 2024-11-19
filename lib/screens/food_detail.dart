@@ -32,7 +32,7 @@ class ProductDetail extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Back to Product List'),
+              child: const Text('Back to Food List'),
             ),
           ],
         ),
