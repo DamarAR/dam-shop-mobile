@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dam_shop/screens/menu.dart';
+import 'package:dam_shop/screens/login.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,19 +10,24 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSwatch(
-       primarySwatch: Colors.deepOrange,
- ).copyWith(secondary: Colors.orangeAccent[400]),
-        useMaterial3: true,
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+        title: 'vins_shop',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.deepPurple,
+          ).copyWith(secondary: Colors.deepPurple[400]),
+        ),
+        home: LoginPage(),
       ),
-      home: MyHomePage(),
     );
   }
 }
+
