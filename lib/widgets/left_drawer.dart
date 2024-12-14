@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:dam_shop/screens/list_foodentry.dart';
 import 'package:dam_shop/screens/menu.dart';
 import 'package:dam_shop/screens/foodentry_form.dart';
+
+import '../screens/list_foodentry.dart';
+// TODO: Import MoodEntryFormPage if it has already been created
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -12,14 +14,13 @@ class LeftDrawer extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
-            
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
             ),
             child: const Column(
               children: [
                 Text(
-                  'Dam-Shop',
+                  'Mental Health Tracker',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -29,23 +30,21 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 Text(
-                  "Buy your Foods every day here!",
+                  "Track your mental health every day here!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
-                    color: Colors.white,
                     fontWeight: FontWeight.normal,
+                    color: Colors.white,
                   ),
+                  // TODO: Add text style with center alignment, font size 15, white color, and normal weight
                 ),
               ],
             ),
-
           ),
-          
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home Page'),
-            // Redirection part to MyHomePage
             onTap: () {
               Navigator.pushReplacement(
                   context,
@@ -55,27 +54,29 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.shop),
-            title: const Text('Add Food'),
-            // Redirection part to ProductEntryFormPage
+            leading: const Icon(Icons.mood),
+            title: const Text('Add Mood'),
+            // Redirection part to MoodEntryFormPage
             onTap: () {
-              Navigator.pop(context); // Close the drawer
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductEntryFormPage(),
-                ),
-              );
+              /*
+              TODO: Add routing to MoodEntryFormPage here,
+              after MoodEntryFormPage is created.
+              */
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MoodEntryFormPage(),
+                  ));
             },
           ),
-        ListTile(
-          leading: const Icon(Icons.add_reaction_rounded),
-          title: const Text('Food List'),
-          onTap: () {
+          ListTile(
+            leading: const Icon(Icons.add_reaction_rounded),
+            title: const Text('Mood List'),
+            onTap: () {
               // Route to the mood page
               Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProductEntryPage()),
+                context,
+                MaterialPageRoute(builder: (context) => const MoodEntryPage()),
               );
             },
           ),

@@ -1,33 +1,32 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:dam_shop/screens/menu.dart';
 import 'package:dam_shop/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert';
 
-class ProductEntryFormPage extends StatefulWidget {
-  const ProductEntryFormPage({super.key});
+class MoodEntryFormPage extends StatefulWidget {
+  const MoodEntryFormPage({super.key});
 
   @override
-  State<ProductEntryFormPage> createState() => _ProductEntryFormPageState();
+  State<MoodEntryFormPage> createState() => _MoodEntryFormPageState();
 }
 
-class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
+class _MoodEntryFormPageState extends State<MoodEntryFormPage> {
   final _formKey = GlobalKey<FormState>();
-  String _name = "";
+  String _food = '';
+  String _description = '';
   int _price = 0;
-	String _description = "";
-	int _rating = 0;
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Add Your Food ',
+            'Add Your Food Today',
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -40,66 +39,35 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Name",
-                    labelText: "Name",
+                    hintText: "Food",
+                    labelText: "Food",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _name = value!;
+                      _food = value!;
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Food cannot be empty!";
+                      return "Food tidak boleh kosong!";
                     }
                     return null;
                   },
                 ),
               ),
-              
-              
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "price",
-                    labelText: "price",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  keyboardType: TextInputType.number,
-                  onChanged: (String? value) {
-                    setState(() {
-                      _price = int.tryParse(value!) ?? 0;
-                    });
-                  },
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return "price cannot be empty!";
-                    }
-                    if (int.tryParse(value) == null) {
-                      return "price must be a number!";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "description",
-                    labelText: "description",
+                    hintText: "Description",
+                    labelText: "Description",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -111,41 +79,38 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "description cannot be empty!";
+                      return "Description tidak boleh kosong!";
                     }
                     return null;
                   },
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "rating",
-                    labelText: "rating",
+                    hintText: "Price",
+                    labelText: "Price",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  keyboardType: TextInputType.number,
                   onChanged: (String? value) {
                     setState(() {
-                      _rating = int.tryParse(value!) ?? 0;
+                      _price = int.tryParse(value!) ?? 0;
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "rating cannot be empty!";
+                      return "Price tidak boleh kosong!";
                     }
                     if (int.tryParse(value) == null) {
-                      return "rating must be a number!";
+                      return "Price harus berupa angka!";
                     }
                     return null;
                   },
                 ),
               ),
-              
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
@@ -156,44 +121,45 @@ class _ProductEntryFormPageState extends State<ProductEntryFormPage> {
                           Theme.of(context).colorScheme.primary),
                     ),
                     onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                          // Send request to Django and wait for the response
-                          // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
-                          final response = await request.postJson(
-                              "http://localhost:8000/create-flutter/",
-                              jsonEncode(<String, String>{
-                                  'name': _name,
-                                  'price': _price.toString(),
-                                  'description': _description,
-                                  'rating': _rating.toString(),
-                              // TODO: Adjust the fields with your project
-                              }),
-                          );
-                          if (context.mounted) {
-                              if (response['status'] == 'success') {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                  content: Text("New product has saved successfully!"),
-                                  ));
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => MyHomePage()),
-                                  );
-                              } else {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                      content:
-                                          Text("Something went wrong, please try again."),
-                                  ));
-                              }
-                          }
-                      }
-                  },
-                  child: const Text(
-                    "Save",
-                    style: TextStyle(color: Colors.white),
+                      print("Save button pressed");
+                        if (_formKey.currentState!.validate()) {
+                            // Send request to Django and wait for the response
+                            // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
+                            final response = await request.postJson(
+                                "http://localhost:8000/create-flutter/",
+                                jsonEncode(<String, String>{
+                                    'food': _food,
+                                    'price': _price.toString(),
+                                    'description': _description,
+                                // TODO: Adjust the fields with your project
+                                }),
+                            );
+                            print(response);
+                            if (context.mounted) {
+                                if (response['status'] == 'success') {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                    content: Text("New food has saved successfully!"),
+                                    ));
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                                    );
+                                } else {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                        content:
+                                            Text("Something went wrong, please try again."),
+                                    ));
+                                }
+                            }
+                        }
+                    },
+                    child: const Text(
+                      "Save",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
                 ),
               ),
             ],

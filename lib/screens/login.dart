@@ -2,7 +2,9 @@ import 'package:dam_shop/screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:dam_shop/screens/register.dart';
+
+import 'register.dart';
+// TODO: Import RegisterPage later
 
 void main() {
   runApp(const LoginApp());

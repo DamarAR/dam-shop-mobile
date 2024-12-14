@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:dam_shop/widgets/left_drawer.dart';
-import 'package:dam_shop/widgets/food_card.dart';
+import '../widgets/food_card.dart';
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
   final String npm = '2306256280'; // NPM
-  final String name = 'Damar Rahman'; // Name
-  final String className = 'PBP KKI'; // Class
+  final String name = 'Damar Aryaputra Rahman'; // Name
+  final String className = 'KKI'; // Class
   final List<ItemHomepage> items = [
-        ItemHomepage("View Product List", Icons.fastfood,Colors.blue),
-        ItemHomepage("Add Product", Icons.add,Colors.green),
-        ItemHomepage("Logout", Icons.logout,Colors.red),
-     ];
-
-  
+    ItemHomepage("View Mood", Icons.mood),
+    ItemHomepage("Add Mood", Icons.add),
+    ItemHomepage("Logout", Icons.logout),
+  ];
+  MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +20,8 @@ class MyHomePage extends StatelessWidget {
       // AppBar is the top part of the page that displays the title.
       appBar: AppBar(
         // The title of the application "Mental Health Tracker" with white text and bold font.
-        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           'Dam-Shop',
-
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -33,6 +29,7 @@ class MyHomePage extends StatelessWidget {
         ),
         // The background color of the AppBar is obtained from the application theme color scheme.
         backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const LeftDrawer(),
       // Body of the page with paddings around it.
@@ -102,8 +99,8 @@ class MyHomePage extends StatelessWidget {
 class InfoCard extends StatelessWidget {
   // Card information that displays the title and content.
 
-  final String title;  // Card title.
-  final String content;  // Card content.
+  final String title; // Card title.
+  final String content; // Card content.
 
   const InfoCard({super.key, required this.title, required this.content});
 
@@ -114,7 +111,8 @@ class InfoCard extends StatelessWidget {
       elevation: 2.0,
       child: Container(
         // Set the size and spacing within the card.
-        width: MediaQuery.of(context).size.width / 3.5, // Adjust with the width of the device used.
+        width: MediaQuery.of(context).size.width /
+            3.5, // Adjust with the width of the device used.
         padding: const EdgeInsets.all(16.0),
         // Place the title and content vertically.
         child: Column(
