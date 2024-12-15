@@ -73,7 +73,7 @@
       Map<String, dynamic> toJson() => {
           "user": user,
           "mood": food,
-          "time": "${time.year.toString().padLeft(4, '0')}-${time.month.toString().padLeft(2, '0')}-${time.day.toString().padLeft(2, '0')}",
+          "time": "${time!.year.toString().padLeft(4, '0')}-${time!.month.toString().padLeft(2, '0')}-${time!.day.toString().padLeft(2, '0')}",
           "feelings": description,
           "mood_intensity": quantity,
       };

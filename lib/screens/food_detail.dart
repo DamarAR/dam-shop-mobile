@@ -4,7 +4,7 @@ import 'package:dam_shop/models/food_entry.dart';
 class MoodDetail extends StatelessWidget {
   final MoodEntry mood;
 
-  const MoodDetail({Key? key, required this.mood}) : super(key: key);
+  const MoodDetail({super.key, required this.mood});
 
   @override
   Widget build(BuildContext context) {
